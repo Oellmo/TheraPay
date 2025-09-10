@@ -1,4 +1,4 @@
-# TherapyPay
+# TheraPay
 
 A simple desktop application built with [Neutralino.js](https://neutralino.js.org/) to help manage and track open invoices.
 
