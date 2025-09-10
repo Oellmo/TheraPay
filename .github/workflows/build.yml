@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: therapypay-app-windows
-          path: dist/
+          path: dist/therapypay-app/
