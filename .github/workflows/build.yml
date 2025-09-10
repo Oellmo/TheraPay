@@ -25,22 +25,18 @@ jobs:
       - name: Install Neutralinojs CLI
         run: npm install -g @neutralinojs/neu
 
-      # 4. Die Anwendung für die Veröffentlichung bauen (mit ausführlicher Ausgabe)
-      - name: Build the application
-        run: neu build --release --verbose
+      # 4. Framework-Binärdateien herunterladen/aktualisieren
+      - name: Update Neutralinojs binaries
+        run: neu update
 
-      # 5. (DEBUG) Inhalt des dist-Ordners auflisten
+      # 5. Die Anwendung für die Veröffentlichung bauen
+      - name: Build the application
+        run: neu build --release
+
+      # 6. (DEBUG) Inhalt des Build-Ordners auflisten, um zu prüfen, ob die .exe existiert
       - name: List files in build directory
         run: ls -R dist
         shell: pwsh # Stellt sicher, dass der Befehl in PowerShell ausgeführt wird
-
-      # 6. (DEBUG) Das erstellte ZIP-Archiv entpacken und den Inhalt überprüfen
-      - name: Unzip and verify artifact content
-        shell: pwsh
-        run: |
-          Expand-Archive -Path dist/therapypay-app-release.zip -DestinationPath dist/unzipped -ErrorAction SilentlyContinue
-          echo "--- Contents of the unzipped artifact: ---"
-          ls -R dist/unzipped
 
       # 7. Die fertige ZIP-Datei als Artefakt hochladen
       - name: Upload artifact
