@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>TherapyPay Dashboard</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      as="style"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Inter%3Awght%40400%3B500%3B700%3B900&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+      onload="this.rel='stylesheet'"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="neutralino.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="bg-[var(--background-color)] text-[var(--text-primary)]">
+    <div
+      class="relative flex size-full min-h-screen flex-col overflow-x-hidden"
+    >
+      <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] px-10 py-4"
+      >
+        <div class="flex items-center gap-4">
+          <div class="size-8 text-[var(--primary-color)]">
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v4h-2v-4zm0 6h2v2h-2v-2z"
+              ></path>
+            </svg>
+          </div>
+          <h1
+            class="text-xl font-bold leading-tight tracking-[-0.015em] text-white"
+          >
+            TherapyPay
+          </h1>
+        </div>
+        <nav class="flex items-center gap-8">
+          <a
+            class="text-sm font-medium leading-normal text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+            href="#"
+            >Dashboard</a
+          >
+          <a
+            class="text-sm font-medium leading-normal text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+            href="#"
+            >Rechnungen</a
+          >
+          <a
+            class="text-sm font-medium leading-normal text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+            href="#"
+            >Patienten</a
+          >
+          <a
+            class="text-sm font-medium leading-normal text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+            href="#"
+            >Einstellungen</a
+          >
+        </nav>
+        <div class="flex items-center gap-4">
+          <button class="relative" aria-label="Benachrichtigungen">
+            <svg
+              aria-hidden="true"
+              class="size-6 text-[var(--text-secondary)]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+            <span class="absolute -top-1 -right-1 flex h-3 w-3">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-color)] opacity-75"
+              ></span>
+              <span
+                class="relative inline-flex h-3 w-3 rounded-full bg-[var(--primary-color)]"
+              ></span>
+            </span>
+          </button>
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW3zedqVgp8RGnlys8ZUsV15QGL880QtuR9AHo7Mwbvt73pTi70gGVo8q6LRiWiGr4MBseZ6E3oqx6D5SmPH24tgRaJ_3GLKmZJyuomTYpFWK9WxK-30f1PX4CgS8tmbJdWvBtvpceJQ74K69pMQFbKWZgRYsReCXFTwngmwR02o5zhqg7gLbdKMbopkxm04IqdT41mjilv39pszWD1G8aC8Y3-sAatMMnv-N4zGmZ7klhqfQrFwgFNnx_5xqocVMkQ4z0fg7-Wrjl"
+            alt="Benutzerprofilbild"
+            class="size-10 rounded-full aspect-square object-cover"
+          />
+        </div>
+      </header>
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        <section class="flex justify-between items-center mb-8">
+          <h2 class="text-3xl font-bold text-white">Dashboard</h2>
+          <button
+            class="bg-[var(--primary-color)] text-white px-6 py-3 rounded-md hover:bg-[var(--secondary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50 transition-colors duration-200"
+            onclick="openModal()"
+          >
+            Bericht erstellen
+          </button>
+        </section>
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article
+            class="bg-[var(--card-background)] rounded-lg shadow-lg p-6 border border-[var(--border-color)]"
+          >
+            <p class="text-base font-medium text-[var(--text-secondary)]">
+              Gesamtzahl offener Rechnungen
+            </p>
+            <p class="text-3xl font-bold tracking-tight text-white" id="total-open-amount">0,00 €</p>
+          </article>
+          <article
+            class="bg-[var(--card-background)] rounded-lg shadow-lg p-6 border border-[var(--border-color)]"
+          >
+            <p class="text-base font-medium text-[var(--text-secondary)]">
+              Überfällige Rechnungen
+            </p>
+            <p class="text-3xl font-bold tracking-tight text-white" id="overdue-amount">0,00 €</p>
+          </article>
+          <article
+            class="bg-[var(--card-background)] rounded-lg shadow-lg p-6 border border-[var(--border-color)]"
+          >
+            <p class="text-base font-medium text-[var(--text-secondary)]">
+              Offene Rechnungen
+            </p>
+            <p class="text-3xl font-bold tracking-tight text-white" id="open-invoices-count">0</p>
+          </article>
+        </section>
+        <section class="mt-8">
+          <h3 class="text-xl font-semibold text-white mb-4">
+            Rechnungsübersicht
+          </h3>
+          <article
+            class="bg-[var(--card-background)] rounded-lg shadow-lg p-6 border border-[var(--border-color)]"
+          >
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-base font-medium text-[var(--text-secondary)]">
+                  Gesamtbetrag
+                </p>
+                <p
+                  class="text-4xl font-bold tracking-tight text-white truncate" id="overview-total-amount"
+                >
+                  0,00 €
+                </p>
+                <div class="flex items-center gap-1 mt-1">
+                  <p class="text-sm font-normal text-[var(--text-secondary)]">
+                    Aktueller Monat
+                  </p>
+                  <p class="text-sm font-medium text-green-500">+5%</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="text-center">
+                  <p class="text-sm font-bold text-[var(--text-secondary)]">
+                    Offen
+                  </p>
+                  <div
+                    class="w-16 h-40 bg-[var(--accent-color)] bg-opacity-20 rounded-t-lg mx-auto mt-2 relative"
+                  >
+                    <div
+                      class="absolute bottom-0 w-full bg-[var(--accent-color)] rounded-t-lg"
+                      style="height: 100%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <p class="text-sm font-bold text-[var(--text-secondary)]">
+                    Bezahlt
+                  </p>
+                  <div
+                    class="w-16 h-40 bg-green-500 bg-opacity-20 rounded-t-lg mx-auto mt-2 relative"
+                  >
+                    <div
+                      class="absolute bottom-0 w-full bg-green-500 rounded-t-lg"
+                      style="height: 90%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <p class="text-sm font-bold text-[var(--text-secondary)]">
+                    Überfällig
+                  </p>
+                  <div
+                    class="w-16 h-40 bg-red-500 bg-opacity-20 rounded-t-lg mx-auto mt-2 relative"
+                  >
+                    <div
+                      class="absolute bottom-0 w-full bg-red-500 rounded-t-lg"
+                      style="height: 50%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+        <section class="mt-8">
+          <h3 class="text-xl font-semibold text-white mb-4">
+            Offene Zahlungen nach Patienten
+          </h3>
+          <div
+            class="overflow-x-auto rounded-lg border border-[var(--border-color)] bg-[var(--card-background)]"
+          >
+            <table class="w-full text-left">
+              <thead class="bg-[var(--background-color)]">
+                <tr>
+                  <th
+                    class="px-6 py-3 text-sm font-medium text-[var(--text-secondary)]"
+                  >
+                    Patientenname
+                  </th>
+                  <th
+                    class="px-6 py-3 text-sm font-medium text-[var(--text-secondary)]"
+                  >
+                    Rechnungen
+                  </th>
+                  <th
+                    class="px-6 py-3 text-sm font-medium text-[var(--text-secondary)]"
+                  >
+                    Gesamtbetrag
+                  </th>
+                  <th
+                    class="px-6 py-3 text-sm font-medium text-[var(--text-secondary)]"
+                  >
+                    Status
+                  </th>
+                  <th class="px-6 py-3 text-right">
+                    <span class="sr-only">Aktionen</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="patient-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div
+      class="fixed inset-0 z-50 overflow-y-auto hidden"
+      id="modal"
+    >
+      <div
+        class="flex min-h-full items-center justify-center p-4 text-center sm:p-0"
+      >
+        <div
+          class="relative transform overflow-hidden rounded-lg bg-[var(--card-background)] text-left shadow-xl transition-all sm:w-full sm:max-w-lg"
+        >
+          <div
+            class="bg-[var(--card-background)] px-4 pb-4 pt-5 sm:p-6 sm:pb-4"
+          >
+            <div class="sm:flex sm:items-start">
+              <div
+                class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[var(--accent-color)] sm:mx-0 sm:h-10 sm:w-10"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="h-6 w-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </div>
+              <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                <h3
+                  class="text-base font-semibold leading-6 text-white"
+                  id="modal-title"
+                >
+                  Bericht erstellen
+                </h3>
+                <div class="mt-2">
+                  <p class="text-sm text-[var(--text-secondary)]">
+                    Bitte lade deine Excel-Datei hoch, um einen neuen Bericht zu
+                    erstellen.
+                  </p>
+                  <div
+                    class="mt-4 flex justify-center rounded-lg border border-dashed border-[var(--border-color)] px-6 py-10"
+                    id="drop-area"
+                  >
+                    <div class="text-center">
+                      <svg
+                        aria-hidden="true"
+                        class="mx-auto h-12 w-12 text-[var(--text-secondary)]"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H9M8.25 10.5h7.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <div class="mt-4 flex text-sm leading-6 text-gray-400">
+                        <label
+                          for="file-upload"
+                          class="relative cursor-pointer rounded-md bg-[var(--card-background)] font-semibold text-[var(--primary-color)] focus-within:outline-none focus-within:ring-2 focus-within:ring-[var(--primary-color)] focus-within:ring-offset-2 hover:text-[var(--secondary-color)]"
+                        >
+                          <span>Datei hochladen</span>
+                          <input
+                            class="sr-only"
+                            id="file-upload"
+                            name="file-upload"
+                            type="file"
+                          />
+                        </label>
+                        <p class="pl-1">oder per Drag & Drop</p>
+                      </div>
+                      <p class="text-xs leading-5 text-gray-400" id="file-name">
+                        XLSX, XLS oder CSV
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-[var(--card-background)] px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+          >
+            <button
+              class="inline-flex w-full justify-center rounded-md bg-[var(--primary-color)] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[var(--secondary-color)] sm:ml-3 sm:w-auto"
+              onclick="closeModal()"
+            >
+              Bericht erstellen
+            </button>
+            <button
+              class="mt-3 inline-flex w-full justify-center rounded-md bg-[var(--background-color)] px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-[var(--border-color)] hover:bg-[var(--card-background)] sm:mt-0 sm:w-auto"
+              onclick="closeModal()"
+            >
+              Abbrechen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Skripte für die PDF- und Excel-Verarbeitung -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+      function toggleDetails(patientId) {
+        const detailsRows = document.querySelectorAll(`[data-details-for='${patientId}']`);
+        const buttonIcon = document.querySelector(`[data-toggle-icon='${patientId}']`);
+        detailsRows.forEach((row) => {
+          row.classList.toggle("hidden");
+        });
+        if (buttonIcon) {
+          buttonIcon.classList.toggle("rotate-180");
+        }
+      }
+
+      const modal = document.getElementById("modal");
+
+      function openModal() {
+        modal.classList.remove("hidden");
+      }
+
+      function closeModal() {
+        modal.classList.add("hidden");
+      }
+
+      const dropArea = document.getElementById("drop-area");
+      const fileUpload = document.getElementById("file-upload");
+      const fileNameDisplay = document.getElementById("file-name");
+
+      // Globaler Zustand für alle Rechnungsdaten
+      let masterData = {};
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      function handleHighlight(e) {
+        dropArea.classList.add("ring-4", "ring-inset", "ring-[var(--primary-color)]");
+      }
+
+      function handleUnhighlight(e) {
+        dropArea.classList.remove("ring-4", "ring-inset", "ring-[var(--primary-color)]");
+      }
+
+      function handleDrop(e) {
+        const files = e.dataTransfer.files;
+        handleFiles(files);
+      }
+
+      function parseAndAggregateExcelData(jsonData) {
+        const aggregatedData = {};
+
+        if (!jsonData || jsonData.length < 2) {
+          console.log("Keine Daten zum Aggregieren vorhanden.");
+          return aggregatedData;
+        }
+
+        const headers = jsonData[0].map((h) =>
+          typeof h === "string" ? h.trim() : h,
+        );
+        const patientNameIndex = headers.indexOf("Text");
+        const invoiceRefIndex = headers.indexOf("Referenz");
+        const dateIndex = headers.indexOf("Buchungsdatum");
+        const amountIndex = headers.indexOf("Betrag in Hauswährung");
+        const zuordnungIndex = headers.indexOf("Zuordnung");
+
+        if (
+          [
+            patientNameIndex,
+            invoiceRefIndex,
+            dateIndex,
+            amountIndex,
+            zuordnungIndex,
+          ].some((index) => index === -1)
+        ) {
+          const missing = [
+            "Text",
+            "Referenz",
+            "Buchungsdatum",
+            "Betrag in Hauswährung",
+            "Zuordnung",
+          ].filter((h) => headers.indexOf(h) === -1);
+          console.error(
+            "Einige der benötigten Spalten wurden nicht gefunden:",
+            missing.join(", "),
+          );
+          alert(
+            `Die Excel-Datei hat nicht das erwartete Format. Folgende Spalten fehlen: ${missing.join(", ")}`,
+          );
+          return {};
+        }
+
+        // Start from the second row (index 1) which should be the first data row
+        for (let i = 1; i < jsonData.length; i++) {
+          const rowData = jsonData[i];
+
+          if (
+            !rowData ||
+            rowData.length === 0 ||
+            rowData.every((cell) => cell === null || cell === "")
+          ) {
+            continue; // Skip empty rows
+          }
+
+          const zuordnung = rowData[zuordnungIndex];
+          if (!zuordnung || !String(zuordnung).trim().startsWith("A")) {
+            continue; // Skip rows where 'Zuordnung' does not start with 'A'
+          }
+
+          let patientName = rowData[patientNameIndex];
+          if (!patientName || typeof patientName !== "string") {
+            continue; // Skip if no patient name
+          }
+          patientName = patientName.trim().replace(/^\*/, "").trim();
+
+          if (!aggregatedData[patientName]) {
+            aggregatedData[patientName] = {
+              invoices: [],
+            };
+          }
+
+          const invoiceRef = rowData[invoiceRefIndex];
+          const dateValue = rowData[dateIndex];
+          const amountValue = rowData[amountIndex];
+
+          // Handle Excel date serial numbers
+          let date;
+          if (typeof dateValue === "number" && dateValue > 1) {
+            // It's likely an Excel date serial number.
+            const excelEpoch = new Date(1899, 11, 30);
+            const jsDate = new Date(
+              excelEpoch.getTime() + dateValue * 86400000,
+            );
+            date = jsDate.toLocaleDateString("de-DE");
+          } else {
+            date = dateValue; // Assume it's already a string or correct format
+          }
+
+          if (invoiceRef) {
+            let amount = 0;
+            if (amountValue !== null && amountValue !== undefined) {
+              if (typeof amountValue === "number") {
+                amount = amountValue;
+              } else {
+                const amountString = String(amountValue)
+                  .replace(/\./g, "")
+                  .replace(",", ".");
+                amount = parseFloat(amountString);
+              }
+            }
+            if (isNaN(amount)) amount = 0;
+
+            aggregatedData[patientName].invoices.push({
+              reference: String(invoiceRef),
+              date: date,
+              amount: amount,
+              status: "offen",
+            });
+          }
+        }
+        return aggregatedData;
+      }
+
+      function mergeData(currentData, newData) {
+        const updatedData = JSON.parse(JSON.stringify(currentData));
+
+        const newInvoiceIds = new Set();
+        for (const patientName in newData) {
+          if (newData[patientName].invoices) {
+            newData[patientName].invoices.forEach((invoice) => {
+              newInvoiceIds.add(`${patientName}|${invoice.reference}`);
+            });
+          }
+        }
+
+        for (const patientName in updatedData) {
+          if (updatedData[patientName].invoices) {
+            updatedData[patientName].invoices.forEach((invoice) => {
+              const invoiceId = `${patientName}|${invoice.reference}`;
+              if (!newInvoiceIds.has(invoiceId)) {
+                invoice.status = "gebucht";
+              }
+            });
+          }
+        }
+
+        for (const patientName in newData) {
+          if (!updatedData[patientName]) {
+            updatedData[patientName] = {
+              ...newData[patientName],
+              invoices: newData[patientName].invoices.map((inv) => ({
+                ...inv,
+                status: "offen",
+              })),
+            };
+          } else {
+            newData[patientName].invoices.forEach((newInvoice) => {
+              const existingInvoice = updatedData[patientName].invoices.find(
+                (oldInv) => oldInv.reference === newInvoice.reference,
+              );
+
+              if (!existingInvoice) {
+                updatedData[patientName].invoices.push({
+                  ...newInvoice,
+                  status: "offen",
+                });
+              } else {
+                existingInvoice.status = "offen";
+                existingInvoice.amount = newInvoice.amount;
+                existingInvoice.date = newInvoice.date;
+              }
+            });
+          }
+        }
+
+        return updatedData;
+      }
+
+      function renderTableAndCards(dataToRender) {
+        function sanitizeForId(name) {
+          return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        }
+
+        const tableBody = document.getElementById("patient-table-body");
+        if (!tableBody) {
+          console.error("Tabellen-Body nicht gefunden!");
+          return;
+        }
+        tableBody.innerHTML = "";
+
+        let totalOpenAmount = 0;
+        let openInvoicesCount = 0;
+        // TODO: Calculate overdue amount when data is available
+
+        for (const patientName in dataToRender) {
+          const patientId = sanitizeForId(patientName);
+          const patientData = dataToRender[patientName];
+
+          const openInvoices = patientData.invoices.filter(inv => inv.status === 'offen');
+          const patientTotalOpenAmount = openInvoices.reduce((sum, inv) => sum + inv.amount, 0);
+          const patientOpenInvoiceCount = openInvoices.length;
+
+          if (patientOpenInvoiceCount === 0) continue; // Nur Patienten mit offenen Rechnungen anzeigen
+
+          totalOpenAmount += patientTotalOpenAmount;
+          openInvoicesCount += patientOpenInvoiceCount;
+
+          const row = document.createElement("tr");
+          row.className =
+            "border-b border-[var(--border-color)] last:border-b-0";
+
+          const cell1 = document.createElement("td");
+          cell1.className = "px-6 py-4 text-sm font-medium text-white";
+          cell1.textContent = patientName;
+          row.appendChild(cell1);
+
+          const cell2 = document.createElement("td");
+          cell2.className = "px-6 py-4 text-sm text-[var(--text-secondary)]";
+          cell2.textContent = patientOpenInvoiceCount;
+          row.appendChild(cell2);
+
+          const cell3 = document.createElement("td");
+          cell3.className =
+            "px-6 py-4 text-sm font-medium text-white text-right";
+          cell3.textContent = patientTotalOpenAmount.toLocaleString("de-DE", {
+            style: "currency",
+            currency: "EUR",
+          });
+          row.appendChild(cell3);
+          
+          const cellStatus = document.createElement("td");
+          cellStatus.className = "px-6 py-4 text-sm";
+          // Da wir nur Patienten mit offenen Rechnungen anzeigen, ist der Status immer "Offen".
+          cellStatus.innerHTML = `<span class="inline-flex items-center rounded-md bg-yellow-500/10 px-2 py-1 text-xs font-medium text-yellow-400 ring-1 ring-inset ring-yellow-500/20">Offen</span>`;
+          row.appendChild(cellStatus);
+
+          const cellActions = document.createElement("td");
+          cellActions.className = "px-6 py-4 text-right";
+          const actionsContainer = document.createElement("div");
+          actionsContainer.className = "flex items-center justify-end gap-2";
+
+          const pdfButton = document.createElement("button");
+          pdfButton.className = "p-1 text-[var(--text-secondary)] hover:text-white hover:bg-gray-700 rounded-md";
+          pdfButton.title = "Rechnung als PDF erstellen";
+          pdfButton.addEventListener('click', () => generateInvoicePdf(patientName));
+          pdfButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" /></svg>`;
+          actionsContainer.appendChild(pdfButton);
+
+          if (patientData.invoices.length > 0) {
+            const button = document.createElement("button");
+            button.className = "p-1 text-[var(--text-secondary)] hover:text-white hover:bg-gray-700 rounded-md";
+            button.title = "Details anzeigen";
+            button.addEventListener('click', () => toggleDetails(patientId));
+            button.innerHTML = `<svg data-toggle-icon="${patientId}" class="w-5 h-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>`;
+            actionsContainer.appendChild(button);
+          }
+          cellActions.appendChild(actionsContainer);
+          row.appendChild(cellActions);
+
+          tableBody.appendChild(row);
+
+          patientData.invoices.forEach(invoice => {
+            const detailRow = document.createElement("tr");
+            detailRow.className = "hidden bg-[var(--background-color)]";
+            detailRow.setAttribute("data-details-for", patientId);
+
+            const detailCell1 = document.createElement("td");
+            detailCell1.className = "pl-12 pr-6 py-2 text-sm text-[var(--text-secondary)]";
+            detailCell1.textContent = `Rechnung: ${invoice.reference}`;
+            detailRow.appendChild(detailCell1);
+
+            const detailCell2 = document.createElement("td");
+            detailCell2.className = "px-6 py-2 text-sm text-[var(--text-secondary)]";
+            detailCell2.textContent = invoice.date ? `${invoice.date}` : "";
+            detailRow.appendChild(detailCell2);
+
+            const detailCell3 = document.createElement("td");
+            detailCell3.className = "px-6 py-2 text-sm text-white text-right";
+            detailCell3.textContent = invoice.amount.toLocaleString("de-DE", { style: "currency", currency: "EUR" });
+            detailRow.appendChild(detailCell3);
+            
+            const detailCellStatus = document.createElement("td");
+            detailCellStatus.className = "px-6 py-2 text-sm";
+            if (invoice.status === 'gebucht') {
+                detailCellStatus.innerHTML = `<span class="inline-flex items-center rounded-md bg-green-500/10 px-2 py-1 text-xs font-medium text-green-400 ring-1 ring-inset ring-green-500/20">Gebucht</span>`;
+            } else {
+                detailCellStatus.innerHTML = `<span class="inline-flex items-center rounded-md bg-yellow-500/10 px-2 py-1 text-xs font-medium text-yellow-400 ring-1 ring-inset ring-yellow-500/20">Offen</span>`;
+            }
+            detailRow.appendChild(detailCellStatus);
+
+            const detailCell4 = document.createElement("td");
+            detailRow.appendChild(detailCell4);
+
+            tableBody.appendChild(detailRow);
+          });
+        }
+
+        // Update dashboard cards
+        document.getElementById('total-open-amount').textContent = totalOpenAmount.toLocaleString("de-DE", { style: "currency", currency: "EUR" });
+        document.getElementById('overview-total-amount').textContent = totalOpenAmount.toLocaleString("de-DE", { style: "currency", currency: "EUR" });
+        document.getElementById('open-invoices-count').textContent = openInvoicesCount;
+        // document.getElementById('overdue-amount').textContent = ... // Can't be calculated from current data
+      }
+
+      // Dies ist die neue, aktive Funktion, die das PDF programmatisch mit jsPDF erstellt.
+      // Sie benötigt NICHT die 'invoice.html'-Vorlagendatei.
+      async function generateInvoicePdf(patientName) {
+        console.log(`[PDF] Starting PDF generation for: ${patientName}`);
+        try {
+            // 1. Daten laden und prüfen
+            const patientData = masterData[patientName];
+            if (!patientData) {
+                console.error(`[PDF] No data found for patient: ${patientName}`);
+                alert(`Keine Daten für Patient "${patientName}" gefunden.`);
+                return;
+            }
+            console.log('[PDF] Patient data found:', patientData);
+
+            const openInvoices = patientData.invoices.filter(inv => inv.status === 'offen');
+            if (openInvoices.length === 0) {
+                console.warn(`[PDF] No open invoices for patient: ${patientName}`);
+                alert(`Keine offenen Rechnungen für "${patientName}" gefunden.`);
+                return;
+            }
+            console.log(`[PDF] Found ${openInvoices.length} open invoices.`);
+
+            // 2. jsPDF initialisieren
+            console.log('[PDF] Initializing jsPDF document...');
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+
+            // --- Font-Setup ---
+            // jsPDF unterstützt standardmäßig nur 'helvetica', 'times', 'courier'.
+            // Um eine benutzerdefinierte Schriftart wie 'Inter' zu verwenden, müsste die .ttf-Datei
+            // geladen und in jsPDF registriert werden. Wir verwenden hier 'helvetica',
+            // um das Layout von invoice.html nachzubilden.
+
+            console.log('[PDF] Building document structure...');
+            // --- Dokument-Konstanten ---
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const margin = 20;
+            const contentWidth = pageWidth - margin * 2;
+            let cursorY = 35; // Start-Y-Position, entspricht dem oberen Innenabstand
+
+            // --- Header ---
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(18);
+            doc.setTextColor(31, 41, 55); // text-gray-800
+            doc.text('Autismuszentrum Bergstraße', margin, cursorY);
+            cursorY += 7;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(10);
+            doc.setTextColor(75, 85, 99); // text-gray-600
+            doc.text('Heidelberger Str. 20\n69198 Schriesheim', margin, cursorY);
+
+            // --- Empfänger- & Absenderinformationen ---
+            cursorY += 20; // Entspricht mt-8
+            doc.setFontSize(11);
+            doc.setTextColor(55, 65, 81); // text-gray-700
+            // HINWEIS: Die Adresse ist hier eine Annahme, da sie nicht im Datenmodell vorhanden ist.
+            const recipientAddress = `${patientName}\nMusterstraße 3\n69469 Weinheim`;
+            doc.text(recipientAddress, margin, cursorY);
+
+            const currentDate = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            doc.text(currentDate, pageWidth - margin, cursorY, { align: 'right' });
+
+            cursorY += 15; // Abstand für Absenderdetails
+            doc.setFontSize(10);
+            const senderInfo = 'Karin Hefner\nVerwaltungskraft\n\nTel.: 06203 8637937\nhefner@autismus-bergstrasse.de';
+            doc.text(senderInfo, pageWidth - margin, cursorY, { align: 'right' });
+
+            // --- Titel & Anrede ---
+            cursorY += 15; // Entspricht mt-6
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(18);
+            doc.setTextColor(31, 41, 55);
+            doc.text('1. Zahlungserinnerung', margin, cursorY);
+
+            cursorY += 10;
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(11);
+            doc.setTextColor(55, 65, 81);
+            // Einfache Annahme für die Anrede basierend auf dem Patientennamen
+            const salutationName = patientName.split(',')[0];
+            doc.text(`Sehr geehrte Familie ${salutationName},`, margin, cursorY);
+
+            cursorY += 7;
+            doc.text('leider konnten wir bei den unten aufgeführten Rechnungen noch keinen Zahlungseingang verzeichnen.', margin, cursorY);
+
+            // --- Tabelle mit jsPDF-AutoTable ---
+            cursorY += 10;
+            const tableHead = [['Rechnungsnummer', 'Abrechnungszeitraum', 'Betreuter', 'Betrag']];
+            const tableBodyData = openInvoices.map(invoice => [
+                invoice.reference,
+                invoice.date || 'N/A',
+                patientName,
+                invoice.amount.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })
+            ]);
+            const totalAmount = openInvoices.reduce((sum, inv) => sum + inv.amount, 0);
+            const tableFootData = [['', '', 'Gesamtbetrag', totalAmount.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })]];
+
+            doc.autoTable({
+                startY: cursorY,
+                head: tableHead,
+                body: tableBodyData,
+                foot: tableFootData,
+                theme: 'grid',
+                headStyles: { fillColor: [249, 250, 251], textColor: [55, 65, 81], font: 'helvetica', fontStyle: 'bold' },
+                footStyles: { font: 'helvetica', fontStyle: 'bold', halign: 'right', textColor: [17, 24, 39] },
+                styles: { font: 'helvetica', textColor: [55, 65, 81], cellPadding: 3 },
+                margin: { left: margin, right: margin },
+                didDrawPage: function (data) {
+                    // --- Seitenfußzeile auf jeder Seite ---
+                    const footerY = pageHeight - 30; // Etwas mehr Platz vom unteren Rand
+                    doc.setFontSize(8);
+                    doc.setTextColor(107, 114, 128); // text-gray-500
+                    
+                    const footerLine1 = 'Autismuszentrum Bergstraße · Heidelberger Str. 20 · 69198 Schriesheim · Telefon: 06203 8637937 · Fax: 06201 5005-13';
+                    doc.text(footerLine1, pageWidth / 2, footerY, { align: 'center' });
+                    
+                    doc.setDrawColor(209, 213, 219); // border-gray-300
+                    doc.line(margin, footerY + 2, pageWidth - margin, footerY + 2);
+
+                    const footerLine2 = 'Träger: Pilgerhaus Weinheim · Evang. Jugend- und Behindertenhilfe · Peter-Koch-Schule (SBBZ)';
+                    const footerLine3 = 'Telefon: 06201 5005-0 · Fax: 06201 5005-13 · www.pilgerhaus.de · infomail@pilgerhaus.de';
+                    const footerLine4 = 'Volksbank Kurpfalz eG: · IBAN. DE52 6709 2300 0001 0554 02 · BIC. GENODE61WNM';
+                    
+                    doc.text(footerLine2, pageWidth / 2, footerY + 6, { align: 'center' });
+                    doc.text(footerLine3, pageWidth / 2, footerY + 10, { align: 'center' });
+                    doc.text(footerLine4, pageWidth / 2, footerY + 14, { align: 'center' });
+                }
+            });
+
+            // --- Abschlusstext & Grußformel ---
+            let finalY = doc.lastAutoTable.finalY + 10; // Position nach der Tabelle
+            doc.setFontSize(11);
+            doc.setTextColor(55, 65, 81);
+            const closingText = 'Sicher ist es nur untergegangen, dass die Rechnungen noch nicht bezahlt wurden.\n\nBitte überweisen Sie den Betrag innerhalb der nächsten 14 Tage auf das untenstehende Konto. Geben Sie bitte eine Rechnungsnummer an, damit der Betrag zugeordnet werden kann.\n\nSollten Sie die Rechnungen inzwischen bereits beglichen haben, betrachten Sie dieses Schreiben als gegenstandslos.\n\nFalls Sie Fragen zu den Rechnungen oder zur Bezahlung haben, können Sie mich gerne kontaktieren.';
+            const splitText = doc.splitTextToSize(closingText, contentWidth);
+            doc.text(splitText, margin, finalY);
+            finalY += (splitText.length * 4.5) + 10; // Höhe des Textblocks + Abstand
+
+            doc.text('Mit freundlichen Grüßen,', margin, finalY);
+            finalY += 8;
+            doc.setFont('helvetica', 'bold');
+            doc.text('Karin Hefner', margin, finalY);
+
+            // 4. PDF über Neutralino-API speichern
+            console.log('[PDF] Document built. Using Neutralino API to save file...');
+            const sanitizedPatientName = patientName.replace(/[^a-zA-Z0-9]/g, '_');
+            const suggestedFileName = `Zahlungserinnerung_${sanitizedPatientName}_${new Date().toISOString().split('T')[0]}.pdf`;
+
+            // PDF-Daten als ArrayBuffer generieren
+            const pdfArrayBuffer = doc.output('arraybuffer');
+
+            // Speicherdialog anzeigen
+            const savePath = await Neutralino.os.showSaveDialog('Zahlungserinnerung speichern', {
+                defaultPath: suggestedFileName,
+                filters: [{ name: 'PDF-Dateien', extensions: ['pdf'] }]
+            });
+
+            if (savePath) {
+                // Datei mit Neutralino-API schreiben
+                await Neutralino.filesystem.writeBinaryFile(savePath, pdfArrayBuffer);
+                console.log(`[PDF] Successfully saved to "${savePath}".`);
+            } else {
+                console.log('[PDF] Save dialog was cancelled by the user.');
+            }
+        } catch (error) {
+            console.error("Fehler beim Erstellen des PDFs mit jsPDF:", error);
+            alert(`Es gab einen Fehler beim Erstellen der PDF-Rechnung: ${error.message}`);
+        }
+      }
+
+      async function handleFiles(files) {
+        if (files.length > 0) {
+          const file = files[0];
+          fileNameDisplay.textContent = file.name;
+          const reader = new FileReader();
+
+          reader.onload = async function (e) {
+            try {
+              const data = new Uint8Array(e.target.result);
+              const workbook = XLSX.read(data, { type: "array" });
+
+              const sheetName = "RAW DATA - bitte nicht ändern";
+              let worksheet = workbook.Sheets[sheetName];
+
+              if (!worksheet) {
+                // Fallback to find a sheet that contains "RAW DATA" case-insensitively
+                const alternativeSheetName = workbook.SheetNames.find(name => name.toUpperCase().includes("RAW DATA"));
+                if (alternativeSheetName) {
+                    worksheet = workbook.Sheets[alternativeSheetName];
+                    console.log(`[DEBUG] Fallback: using sheet "${alternativeSheetName}"`);
+                } else {
+                    alert(`Das Tabellenblatt "${sheetName}" wurde nicht in der Excel-Datei gefunden.`);
+                    fileNameDisplay.textContent = "XLSX, XLS oder CSV";
+                    closeModal();
+                    return;
+                }
+              }
+
+              const jsonData = XLSX.utils.sheet_to_json(worksheet, {
+                header: 1,
+                defval: "", // Use empty string for empty cells
+              });
+
+              const newAggregatedData = parseAndAggregateExcelData(jsonData);
+              masterData = mergeData(masterData, newAggregatedData);
+
+              try { // Save data using Neutralinojs filesystem API
+                const dataPath = await Neutralino.os.getPath('data');
+                const filePath = `${dataPath}/data.json`;
+
+                await Neutralino.filesystem.writeFile(
+                  filePath,
+                  JSON.stringify(masterData, null, 2)
+                );
+                console.log(
+                  `[DEBUG] Master-Daten erfolgreich in ${filePath} gespeichert.`
+                );
+              } catch (saveError) {
+                console.error("Fehler beim Speichern der data.json:", saveError);
+                const errorMessage = saveError.message ? saveError.message : JSON.stringify(saveError);
+                alert(`Die Daten konnten nicht gespeichert werden. Die Tabelle wird trotzdem aktualisiert. Fehler: ${errorMessage}`);
+              }
+
+              renderTableAndCards(masterData);
+              closeModal();
+            } catch (error) {
+              console.error("Fehler beim Verarbeiten der Datei:", error);
+              alert("Die Datei konnte nicht verarbeitet werden. Stellen Sie sicher, dass es sich um eine gültige Excel-Datei handelt.");
+              fileNameDisplay.textContent = "XLSX, XLS oder CSV"; // Reset file name
+            }
+          };
+
+          reader.onerror = function () {
+            alert("Fehler beim Lesen der Datei.");
+            fileNameDisplay.textContent = "XLSX, XLS oder CSV"; // Reset file name
+          };
+
+          reader.readAsArrayBuffer(file);
+        }
+      }
+
+      async function loadInitialData() {
+        try { // Initialize Neutralino and load data
+          const dataPath = await Neutralino.os.getPath('data');
+          const filePath = `${dataPath}/data.json`;
+
+          try {
+            const jsonString = await Neutralino.filesystem.readFile(filePath);
+            const loadedData = JSON.parse(jsonString);
+
+            // Migration check: Detect old data format (array of arrays)
+            if (Array.isArray(loadedData)) {
+              alert(
+                `Ein altes, inkompatibles Datenformat wurde erkannt (data.json).\n\nBitte löschen Sie diese Datei, um die neuen Funktionen nutzen zu können. Die Anwendung wird sie beim nächsten Hochladen einer Excel-Datei korrekt neu erstellen.\n\nDer Speicherort ist: ${filePath}`
+              );
+              masterData = {}; // Start with a clean state
+            } else {
+              masterData = loadedData;
+              console.log(`Daten erfolgreich aus ${filePath} geladen.`);
+            }
+          } catch (e) {
+            // This error is expected if the file doesn't exist yet.
+            console.log("Keine data.json zum Laden gefunden. Das ist beim ersten Start normal.", e);
+          }
+          renderTableAndCards(masterData);
+        } catch (error) {
+          console.error("Fehler beim Initialisieren oder Laden der Daten:", error);
+          // If Neutralino fails, we might still want to render an empty table.
+          renderTableAndCards(masterData);
+        }
+      }
+
+      ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+      });
+
+      ["dragenter", "dragover"].forEach((eventName) => {
+        dropArea.addEventListener(eventName, handleHighlight, false);
+      });
+
+      ["dragleave", "drop"].forEach((eventName) => {
+        dropArea.addEventListener(eventName, handleUnhighlight, false);
+      });
+
+      dropArea.addEventListener("drop", handleDrop, false);
+      fileUpload.addEventListener("change", (e) => handleFiles(e.target.files), false);
+
+      Neutralino.init();
+      Neutralino.events.on("ready", () => {
+        loadInitialData();
+      });
+    </script>
+  </body>
+</html>
