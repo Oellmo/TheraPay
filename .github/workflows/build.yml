@@ -29,14 +29,9 @@ jobs:
       - name: Build the application
         run: neu build --release
 
-      # 5. (DEBUG) Inhalt des Build-Ordners auflisten, um zu prüfen, ob die .exe existiert
-      - name: List files in build directory
-        run: ls -R dist
-        shell: pwsh # Stellt sicher, dass der Befehl in PowerShell ausgeführt wird
-
-      # 6. Die gebauten Dateien als Artefakt hochladen
+      # 5. Die fertige ZIP-Datei als Artefakt hochladen
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: therapypay-app-windows
-          path: dist/
+          path: dist/therapypay-app-release.zip
